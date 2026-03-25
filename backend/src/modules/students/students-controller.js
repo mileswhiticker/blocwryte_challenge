@@ -29,6 +29,7 @@ const handleGetAllStudents = asyncHandler(async (req, res) => {
     } catch(error) {
 
         //HTTP INTERNAL SERVER ERROR
+        console.error(`500: error`, error);
         return res.status(500).json({message: error.message});
     }
 
@@ -49,16 +50,17 @@ const handleAddStudent = asyncHandler(async (req, res) => {
 
         //is the request well formed?
         if(
-            !req.body.name ||
-            !req.body.email ||
-            !req.body.class_name ||
-            !req.body.section_name ||
-            !req.body.roll ||
-            !req.body.dob ||
-            !req.body.father_name ||
-            !req.body.father_phone
+            req.body.name === undefined ||
+            req.body.email === undefined ||
+            req.body.class === undefined ||
+            req.body.section === undefined ||
+            req.body.roll === undefined ||
+            req.body.dob === undefined ||
+            req.body.fatherName === undefined ||
+            req.body.fatherPhone === undefined
         ) {
             //HTTP BAD REQUEST
+            console.warn(`400: Missing field in request body, check API documentation`, req.body);
             return res.status(400).json({message: "Missing field in request body, check API documentation", body: req.body});
         }
 
@@ -71,6 +73,7 @@ const handleAddStudent = asyncHandler(async (req, res) => {
     } catch(error) {
 
         //HTTP INTERNAL SERVER ERROR
+        console.error(`500: error`, error);
         return res.status(500).json({message: error.message});
     }
 });
@@ -90,18 +93,20 @@ const handleUpdateStudent = asyncHandler(async (req, res) => {
 
         //is the request well formed?
         if(
-            !req.body.name ||
-            !req.body.phone
+            req.body.name === undefined ||
+            req.body.phone === undefined
         ) {
             //HTTP BAD REQUEST
+            console.warn(`400: Missing field in request body, check API documentation`, req.body);
             return res.status(400).json({message: "Missing field in request body, check API documentation", body: req.body});
         }
 
         //is the request well formed?
         if(
-            !req.params.id
+            req.params.id === undefined
         ) {
             //HTTP BAD REQUEST
+            console.warn(`400: Missing field in url params, check API documentation`, req.params);
             return res.status(400).json({message: "Missing field in url params, check API documentation", params: req.params});
         }
 
@@ -115,6 +120,7 @@ const handleUpdateStudent = asyncHandler(async (req, res) => {
     } catch(error) {
 
         //HTTP INTERNAL SERVER ERROR
+        console.error(`500: error`, error);
         return res.status(500).json({message: error.message});
     }
 });
@@ -134,9 +140,10 @@ const handleGetStudentDetail = asyncHandler(async (req, res) => {
 
         //is the request well formed?
         if(
-            !req.params.id
+            req.params.id === undefined
         ) {
             //HTTP BAD REQUEST
+            console.warn(`400: Missing field in url params, check API documentation`, req.params);
             return res.status(400).json({message: "Missing field in url params, check API documentation", params: req.params});
         }
 
@@ -149,6 +156,7 @@ const handleGetStudentDetail = asyncHandler(async (req, res) => {
     } catch(error) {
 
         //HTTP INTERNAL SERVER ERROR
+        console.error(`500: error`, error);
         return res.status(500).json({message: error.message});
     }
 });
@@ -168,9 +176,10 @@ const handleStudentStatus = asyncHandler(async (req, res) => {
 
         //is the request well formed?
         if(
-            !req.body.status
+            req.body.status === undefined
         ) {
             //HTTP BAD REQUEST
+            console.warn(`400: Missing field in request body, check API documentation`, req.body);
             return res.status(400).json({message: "Missing field in request body, check API documentation", body: req.body});
         }
 
@@ -179,6 +188,7 @@ const handleStudentStatus = asyncHandler(async (req, res) => {
             !req.params.id
         ) {
             //HTTP BAD REQUEST
+            console.warn(`400: Missing field in url params, check API documentation`, req.params);
             return res.status(400).json({message: "Missing field in url params, check API documentation", params: req.params});
         }
 
@@ -194,6 +204,7 @@ const handleStudentStatus = asyncHandler(async (req, res) => {
     } catch(error) {
 
         //HTTP INTERNAL SERVER ERROR
+        console.error(`500: error`, error);
         return res.status(500).json({message: error.message});
     }
 });
