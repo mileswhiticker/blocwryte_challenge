@@ -100,12 +100,12 @@ describe('Students Controller', () => {
             req.body = {
                 name: 'John Doe',
                 email: 'john@example.com',
-                class_name: 'Class 1',
-                section_name: 'A',
+                class: 'Class 1',
+                section: 'A',
                 roll: '1',
                 dob: '2000-01-01',
-                father_name: 'Father',
-                father_phone: '1234567890',
+                fatherName: 'Father',
+                fatherPhone: '1234567890',
             };
         });
 
